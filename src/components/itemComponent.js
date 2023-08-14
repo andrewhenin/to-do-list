@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "../styles/itemComponent.module.css";
-import item from "../utils/models.js"
+// import item from "../utils/models.js"
 
-
-const ItemComponent = (myitem: item) => {
+const ItemComponent = (props) => {
     return (
         <div>
-            <div>{myitem.name}</div>
-            <div>{myitem.description}</div>
+            <div>{props.item.name}</div>
+            <div>{props.item.description}</div>
         </div>
     )
 }

@@ -2,26 +2,27 @@ import './App.css';
 import React from 'react';
 import ItemComponent from './components/itemComponent';
 
+export class item {
+  constructor(title, description) {
+      this.title = title;
+      this.description = description;
+      this.completed = false;
+  }
+}
+
 function App() {
   const [currentTasks, setCurrentTasks] = React.useState([]);
-  const [completedTasks, setCompletedTasks] = React.useState([]);
   
-  const currentTasksList = currentTasks.map((task, index) => {
+  const currentTasksList = currentTasks.map((task) => {
     return (
-      <ItemComponent key={index} task={task} />
-    );
-  });
-
-  const completedTasksList = completedTasks.map((task, index) => {
-    return (
-      <ItemComponent key={index} task={task} />
+      <ItemComponent item={task} />
     );
   });
 
   const handleAddTask = () => {
     const taskName = prompt("Enter task name");
     const taskDescription = prompt("Enter task description");
-    const newItem = ItemComponent(taskName, taskDescription);
+    const newItem = new item(taskName, taskDescription);
     if (newItem) {
       setCurrentTasks([...currentTasks, newItem]);
     }
@@ -44,10 +45,10 @@ function App() {
         >add</button>
         {currentTasksList}
       </div>
-      <div className="completed-list">
+      {/* <div className="completed-list">
         <h2>Completed</h2>
         {completedTasksList}
-      </div>
+      </div> */}
     </div>
   );
 }
