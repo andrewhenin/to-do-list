@@ -1,30 +1,58 @@
 import './App.css';
 import React from 'react';
-import ItemComponent from './components/itemComponent';
 
 export class item {
-  constructor(title, description) {
-      this.title = title;
-      this.description = description;
-      this.completed = false;
+  constructor(id, title, description) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.completed = false;
   }
 }
 
 function App() {
   const [currentTasks, setCurrentTasks] = React.useState([]);
-  
-  const currentTasksList = currentTasks.map((task) => {
+  const [idCounter, setIdCounter] = React.useState(0);
+
+  const handleRemoveTask = (taskId) => {
+    const updatedTasks = currentTasks.filter(task => task.id !== taskId);
+    setCurrentTasks(updatedTasks);
+  }
+
+  const ItemComponent = ({item, onClickFunc}) => {
     return (
-      <ItemComponent item={task} />
-    );
-  });
+        <div>
+            <span>
+                Title: {item.title}
+            </span>
+            &nbsp;
+            <span>
+                Description: {item.description}
+            </span>
+            <div>
+                <button
+                    onClick={()=> onClickFunc(item.id)}
+                >
+                    <img alt="x" src="../assets/Red_X.png" />
+                </button>
+            </div>
+        </div>
+    )
+  }
+
+  const currentTasksList = currentTasks.map((task) => (
+    <div key={task.id}>
+      <ItemComponent item={task} onClickFunc={handleRemoveTask}/>
+    </div>
+  ));
 
   const handleAddTask = () => {
     const taskName = prompt("Enter task name");
     const taskDescription = prompt("Enter task description");
-    const newItem = new item(taskName, taskDescription);
+    const newItem = new item(idCounter, taskName, taskDescription);
     if (newItem) {
       setCurrentTasks([...currentTasks, newItem]);
+      setIdCounter(idCounter + 1);
     }
   }
 
@@ -45,7 +73,7 @@ function App() {
         >add</button>
         {currentTasksList}
       </div>
-      {/* <div className="completed-list">
+      {/* <div className="com pleted-list">
         <h2>Completed</h2>
         {completedTasksList}
       </div> */}
