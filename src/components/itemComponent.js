@@ -1,26 +1,26 @@
 import React from "react";
-import styles from "../styles/itemComponent.module.css";
+import { ReactComponent as XIcon } from "../assets/Red_X";
 // import item from "../utils/models.js"
 
-const ItemComponent = (props, {onClickFunc}) => {
+const ItemComponent = ({item, onClickFunc}) => {
     return (
         <div>
             <span>
-                Title: {props.item.title}
+                Title: {item.title}
             </span>
             &nbsp;
             <span>
-                Description: {props.item.description}
+                Description: {item.description}
             </span>
             <div>
                 <button
-                    onClick={onClickFunc}
+                    onClick={()=> onClickFunc(item.id)}
                 >
-                    <img alt="x" src="../assets/Red_X.png" />
+                    <XIcon />
                 </button>
             </div>
         </div>
     )
-}
+  }
 
 export default ItemComponent;

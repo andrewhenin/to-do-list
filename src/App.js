@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import ItemComponent from './components/itemComponent';
 
 export class item {
   constructor(id, title, description) {
@@ -17,27 +18,6 @@ function App() {
   const handleRemoveTask = (taskId) => {
     const updatedTasks = currentTasks.filter(task => task.id !== taskId);
     setCurrentTasks(updatedTasks);
-  }
-
-  const ItemComponent = ({item, onClickFunc}) => {
-    return (
-        <div>
-            <span>
-                Title: {item.title}
-            </span>
-            &nbsp;
-            <span>
-                Description: {item.description}
-            </span>
-            <div>
-                <button
-                    onClick={()=> onClickFunc(item.id)}
-                >
-                    <img alt="x" src="../assets/Red_X.png" />
-                </button>
-            </div>
-        </div>
-    )
   }
 
   const currentTasksList = currentTasks.map((task) => (

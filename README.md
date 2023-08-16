@@ -5,8 +5,8 @@ This project is the first in the hackathon.
 ## User stories:
 
 ### MVP:
-1. I should be able to add a task to my to-do list.
-2. I should be able to remove a task from my to-do list.
+- [x] 1. I should be able to add a task to my to-do list.
+- [x] 2. I should be able to remove a task from my to-do list.
 3. I should be able to mark a task as completed.
 4. I should be able to see all the completed tasks.
 5. I should be able to see all the uncompleted tasks.
