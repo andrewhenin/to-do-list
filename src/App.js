@@ -12,27 +12,38 @@ export class item {
 }
 
 function App() {
-  const [currentTasks, setCurrentTasks] = React.useState([]);
+  const [activeTasks, setActiveTasks] = React.useState([]);
+  const [completedTasks, setcompletedTasks] = React.useState([]);
   const [idCounter, setIdCounter] = React.useState(0);
-
-  const handleRemoveTask = (taskId) => {
-    const updatedTasks = currentTasks.filter(task => task.id !== taskId);
-    setCurrentTasks(updatedTasks);
-  }
-
-  const currentTasksList = currentTasks.map((task) => (
-    <div key={task.id}>
-      <ItemComponent item={task} onClickFunc={handleRemoveTask}/>
-    </div>
-  ));
 
   const handleAddTask = () => {
     const taskName = prompt("Enter task name");
     const taskDescription = prompt("Enter task description");
     const newItem = new item(idCounter, taskName, taskDescription);
     if (newItem) {
-      setCurrentTasks([...currentTasks, newItem]);
+      setActiveTasks([...activeTasks, newItem]);
       setIdCounter(idCounter + 1);
+    }
+  }
+
+  const handleRemoveTask = (taskId) => {
+    const updatedActiveTasks = activeTasks.filter(task => task.id !== taskId);
+    setActiveTasks(updatedActiveTasks);
+    const updatedcompletedTasks = completedTasks.filter(task => task.id !== taskId);
+    setcompletedTasks(updatedcompletedTasks);
+  }
+
+  const handleCheck = (task) => {
+    if (task.completed) {
+      task.completed = false;
+      setActiveTasks([...activeTasks, task]);
+      const updatedcompletedTasks = completedTasks.filter(current_task => task.id !== current_task.id);
+      setcompletedTasks(updatedcompletedTasks);
+    } else {
+      task.completed = true;
+      setcompletedTasks([...completedTasks, task])
+      const updatedActiveTasks = activeTasks.filter(current_task => task.id !== current_task.id);
+      setActiveTasks(updatedActiveTasks);
     }
   }
 
@@ -46,17 +57,21 @@ function App() {
           To-Do List
         </h1>
       </header>
-      <div className="current-list">
-        <h2>Current</h2>
+      <div className="active-list">
+        <h2>Active</h2>
         <button
           onClick={handleAddTask}
         >add</button>
-        {currentTasksList}
+        {activeTasks.map(task => (
+          <ItemComponent item={task} removeFunc={handleRemoveTask(task.id)} checkFunc={handleCheck(task)}/>
+        ))}
       </div>
-      {/* <div className="com pleted-list">
+      <div className="completed-list">
         <h2>Completed</h2>
-        {completedTasksList}
-      </div> */}
+        {completedTasks.map(task => (
+          <ItemComponent item={task} removeFunc={handleRemoveTask(task.id)} checkFunc={handleCheck(task)} />
+        ))}
+      </div>
     </div>
   );
 }

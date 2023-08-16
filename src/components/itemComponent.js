@@ -1,10 +1,15 @@
 import React from "react";
-import { ReactComponent as XIcon } from "../assets/Red_X";
 // import item from "../utils/models.js"
 
-const ItemComponent = ({item, onClickFunc}) => {
+const ItemComponent = ({item, removeFunc, checkFunc}) => {
     return (
         <div>
+            <input
+                type="checkbox"
+                onClick={checkFunc(item)}
+            >
+
+            </input>
             <span>
                 Title: {item.title}
             </span>
@@ -14,9 +19,10 @@ const ItemComponent = ({item, onClickFunc}) => {
             </span>
             <div>
                 <button
-                    onClick={()=> onClickFunc(item.id)}
+                    onClick={()=> removeFunc(item.id)}
                 >
-                    <XIcon />
+                    x
+                    {/* <img alt="x" src="../assets/Red_X.png"/> */}
                 </button>
             </div>
         </div>
