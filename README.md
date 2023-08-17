@@ -7,12 +7,11 @@ This project is the first in the hackathon.
 ### MVP:
 - [x] 1. I should be able to add a task to my to-do list.
 - [x] 2. I should be able to remove a task from my to-do list.
-3. I should be able to mark a task as completed.
-4. I should be able to see all the completed tasks.
-5. I should be able to see all the uncompleted tasks.
-6. I should be able to reoder the tasks in the list.
-7. I should be able to edit the task.
-8. I should see a different quote every day above my tasks.
+- [ ] 3. I should be able to mark a task as completed.
+- [ ] 4. I should be able to see all the completed tasks.
+- [x] 5. I should be able to see all the uncompleted tasks.
+- [ ] 6. I should be able to reoder the tasks in the list.
+- [ ] 7. I should be able to edit the task.
 
 ### Stretch:
 1. I want to set a due date for the task.
