@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TaskComponent = ({item, removeFunc, checkFunc}) => {
+export const TaskComponent = ({item, removeFunc, checkFunc, editFunc}) => {
     return (
         <div>
             <input
@@ -29,6 +29,11 @@ export const TaskComponent = ({item, removeFunc, checkFunc}) => {
                 </span>
             </span>
             <div>
+                <button
+                    onClick={() => editFunc(item)}
+                >
+                    edit
+                </button>
                 <button
                     onClick={() => removeFunc(item)}
                 >
