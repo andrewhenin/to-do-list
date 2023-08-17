@@ -1,14 +1,13 @@
 import React from "react";
-// import item from "../utils/models.js"
 
-const ItemComponent = ({item, removeFunc, checkFunc}) => {
+export const TaskComponent = ({item, removeFunc, checkFunc}) => {
     return (
         <div>
             <input
                 type="checkbox"
-                onClick={checkFunc(item)}
+                checked={item.completed}
+                onChange={() => checkFunc(item)}
             >
-
             </input>
             <span>
                 Title: {item.title}
@@ -19,7 +18,7 @@ const ItemComponent = ({item, removeFunc, checkFunc}) => {
             </span>
             <div>
                 <button
-                    onClick={()=> removeFunc(item.id)}
+                    onClick={() => removeFunc(item)}
                 >
                     x
                     {/* <img alt="x" src="../assets/Red_X.png"/> */}
@@ -29,4 +28,4 @@ const ItemComponent = ({item, removeFunc, checkFunc}) => {
     )
   }
 
-export default ItemComponent;
+export default TaskComponent;

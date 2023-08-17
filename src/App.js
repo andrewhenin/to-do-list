@@ -1,52 +1,48 @@
 import './App.css';
 import React from 'react';
-import ItemComponent from './components/itemComponent';
+import { TaskComponent } from './components/taskComponent';
+import Task from './utils/models';
 
-export class item {
-  constructor(id, title, description) {
-    this.id = id;
-    this.title = title;
-    this.description = description;
-    this.completed = false;
-  }
-}
 
 function App() {
   const [activeTasks, setActiveTasks] = React.useState([]);
   const [completedTasks, setcompletedTasks] = React.useState([]);
   const [idCounter, setIdCounter] = React.useState(0);
+  console.log(idCounter);
 
   const handleAddTask = () => {
     const taskName = prompt("Enter task name");
     const taskDescription = prompt("Enter task description");
-    const newItem = new item(idCounter, taskName, taskDescription);
-    if (newItem) {
-      setActiveTasks([...activeTasks, newItem]);
-      setIdCounter(idCounter + 1);
-    }
+    const newItem = new Task(idCounter, taskName, taskDescription);
+    setActiveTasks([...activeTasks, newItem]);
+    setIdCounter(idCounter + 1);
+    console.log(idCounter);
   }
 
-  const handleRemoveTask = (taskId) => {
-    const updatedActiveTasks = activeTasks.filter(task => task.id !== taskId);
-    setActiveTasks(updatedActiveTasks);
-    const updatedcompletedTasks = completedTasks.filter(task => task.id !== taskId);
-    setcompletedTasks(updatedcompletedTasks);
-  }
-
-  const handleCheck = (task) => {
+  const handleRemoveTask = (task) => {
     if (task.completed) {
-      task.completed = false;
-      setActiveTasks([...activeTasks, task]);
-      const updatedcompletedTasks = completedTasks.filter(current_task => task.id !== current_task.id);
+      const updatedcompletedTasks = completedTasks.filter(curr_task => task.id !== curr_task.id);
       setcompletedTasks(updatedcompletedTasks);
     } else {
-      task.completed = true;
-      setcompletedTasks([...completedTasks, task])
-      const updatedActiveTasks = activeTasks.filter(current_task => task.id !== current_task.id);
+      const updatedActiveTasks = activeTasks.filter(curr_task => task.id !== curr_task.id);
       setActiveTasks(updatedActiveTasks);
     }
   }
 
+  const handleCheck = (task) => {
+    return () => {
+      const updatedTask = { ...task, completed: !task.completed };
+      
+      if (task.completed) {
+        setcompletedTasks([...completedTasks, updatedTask]);
+        setActiveTasks(activeTasks.filter(current_task => current_task.id !== task.id));
+      } else {
+        setActiveTasks([...activeTasks, updatedTask]);
+        setcompletedTasks(completedTasks.filter(current_task => current_task.id !== task.id));
+      }
+    };
+  };
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -60,17 +56,23 @@ function App() {
       <div className="active-list">
         <h2>Active</h2>
         <button
-          onClick={handleAddTask}
-        >add</button>
-        {activeTasks.map(task => (
-          <ItemComponent item={task} removeFunc={handleRemoveTask(task.id)} checkFunc={handleCheck(task)}/>
-        ))}
+          onClick={() => handleAddTask()}
+        >
+          add
+        </button>
+        <div>
+          {activeTasks.map(task => (
+            <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck} key={task.id} />
+          ))}
+        </div>
       </div>
       <div className="completed-list">
         <h2>Completed</h2>
-        {completedTasks.map(task => (
-          <ItemComponent item={task} removeFunc={handleRemoveTask(task.id)} checkFunc={handleCheck(task)} />
-        ))}
+        <div>
+          {completedTasks.map(task => (
+            <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck} key={task.id} />
+          ))}
+        </div>
       </div>
     </div>
   );
