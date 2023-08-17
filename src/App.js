@@ -8,7 +8,6 @@ function App() {
   const [activeTasks, setActiveTasks] = React.useState([]);
   const [completedTasks, setcompletedTasks] = React.useState([]);
   const [idCounter, setIdCounter] = React.useState(0);
-  console.log(idCounter);
 
   const handleAddTask = () => {
     const taskName = prompt("Enter task name");
@@ -16,7 +15,6 @@ function App() {
     const newItem = new Task(idCounter, taskName, taskDescription);
     setActiveTasks([...activeTasks, newItem]);
     setIdCounter(idCounter + 1);
-    console.log(idCounter);
   }
 
   const handleRemoveTask = (task) => {
@@ -46,9 +44,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p className="hackathon-header">
+        <div className="hackathon-header">
           <span className="hackathon-text">7-Day Hackathon</span>
-        </p>
+          <span className="project-number">Project 1</span>
+        </div>
         <h1>
           To-Do List
         </h1>

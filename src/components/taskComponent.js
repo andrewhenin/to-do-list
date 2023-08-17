@@ -10,11 +10,23 @@ export const TaskComponent = ({item, removeFunc, checkFunc}) => {
             >
             </input>
             <span>
-                Title: {item.title}
+                Title: 
+                <span 
+                    contentEditable={true}
+                    id="title"
+                >
+                    {item.title}
+                </span>
             </span>
             &nbsp;
             <span>
-                Description: {item.description}
+                Description: 
+                <span 
+                    contentEditable={true}
+                    id="description"
+                >
+                    {item.description}
+                </span>
             </span>
             <div>
                 <button
