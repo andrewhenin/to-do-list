@@ -33,7 +33,7 @@ function App() {
     return () => {
       const updatedTask = { ...task, completed: !task.completed };
       
-      if (task.completed) {
+      if (!task.completed) {
         setcompletedTasks([...completedTasks, updatedTask]);
         setActiveTasks(activeTasks.filter(current_task => current_task.id !== task.id));
       } else {
@@ -62,7 +62,7 @@ function App() {
         </button>
         <div>
           {activeTasks.map(task => (
-            <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck} key={task.id} />
+            <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck(task)} key={task.id} />
           ))}
         </div>
       </div>
@@ -70,7 +70,7 @@ function App() {
         <h2>Completed</h2>
         <div>
           {completedTasks.map(task => (
-            <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck} key={task.id} />
+            <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck(task)} key={task.id} />
           ))}
         </div>
       </div>

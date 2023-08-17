@@ -5,8 +5,8 @@ export const TaskComponent = ({item, removeFunc, checkFunc}) => {
         <div>
             <input
                 type="checkbox"
-                checked={item.completed}
                 onChange={() => checkFunc(item)}
+                checked={item.completed}
             >
             </input>
             <span>
