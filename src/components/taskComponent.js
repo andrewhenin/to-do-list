@@ -1,42 +1,38 @@
 import React from "react";
+import styles from "../styles/itemComponent.module.css";
 
 export const TaskComponent = ({item, removeFunc, checkFunc, editFunc}) => {
     return (
-        <div>
+        <div className={styles["task-component"]}>
             <input
                 type="checkbox"
                 onChange={() => checkFunc(item)}
                 checked={item.completed}
             >
             </input>
-            <span>
-                Title: 
-                <span 
-                    id="title"
-                >
-                    {item.title}
-                </span>
+            <span 
+                id="title"
+                className="title"
+            >
+                {item.title}
             </span>
             &nbsp;
-            <span>
-                Description: 
-                <span 
-                    id="description"
-                >
-                    {item.description}
-                </span>
+            <span 
+                id="description"
+            >
+                {item.description}
             </span>
             <div>
                 <button
                     onClick={() => editFunc(item)}
                 >
-                    edit
+                    Edit
                 </button>
+                &nbsp;
                 <button
                     onClick={() => removeFunc(item)}
                 >
-                    x
-                    {/* <img alt="x" src="../assets/Red_X.png"/> */}
+                    Delete
                 </button>
             </div>
         </div>
