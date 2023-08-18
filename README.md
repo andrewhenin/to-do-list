@@ -32,14 +32,12 @@ This project is the first in the hackathon.
 
 - If `myFunction()` is intended to be used as a *callback* for an event, this is not the correct way to do it. For example, this line
 ```
-JSX
 <button onClick={myFunction()}>Click me</button>
 ```
 will invoke the function once the button renders. 
 
 - The correct way of doing this is to pass in a *reference* to `myFunction()`, which will be `myFunction`. This is as follows:
 ```
-JSX
 <button onClick={myFunction}>Click me</button>
 ```
 In this line, the function `myFunction()` will be called only when the button is clicked, which will execute the code inside the function.
@@ -52,17 +50,14 @@ Working with callbacks in React can get tricky. Therefore, the best practices fo
 
 - **Use arrow functions or bind:** When passing a function that requires specific context or arguments, two ways of doing this is by either using *arrow functions* or the `.bind()` method to ensure that the function is invoked with the correct context and arguments. An example for the *arrow notation* vs using `.bind()` is as follows:
 ```
-JSX
 <button onClick={() => myFunction(argument)}>Click me</button>
 ```
 ```
-JSX
 <button onClick={myFunction.bind(this, argument)}>Click me</button>
 ```
 
 - Lastly, **I can avoid exessive re-renders.** This is by using `useCallback`. When passing in references of functions as props to a child component, there is the risk of re-rendering this child component every time the parent renders. To avoid this, using the hook `useCallback` is a good idea. `useCallback` memoizes the function and ensures it only changes when its `dependencies` change. This is an example of using the hook:
 ```
-JSX
 import { useCallback } from 'react';
 
 const MyComponent = ({ onClick }) => {
