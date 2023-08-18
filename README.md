@@ -4,7 +4,7 @@ This project is the first in the hackathon.
 
 ## User stories:
 
-### MVP: Completed:
+### :white_check_mark: MVP:
 - [x] 1. I should be able to add a task to my to-do list.
 - [x] 2. I should be able to remove a task from my to-do list.
 - [x] 3. I should be able to mark a task as completed.
