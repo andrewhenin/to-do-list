@@ -28,7 +28,6 @@ function App() {
   }
 
   const handleCheck = (task) => {
-    return () => {
       const updatedTask = { ...task, completed: !task.completed };
       
       if (!task.completed) {
@@ -37,17 +36,14 @@ function App() {
       } else {
         setActiveTasks([...activeTasks, updatedTask]);
         setcompletedTasks(completedTasks.filter(current_task => current_task.id !== task.id));
-      }
     };
   };
 
-  const handleEdit = (task) => {
-    return () => {
-      task.title = prompt("Enter task name")
-      task.description = prompt("Enter task description")
+  function handleEdit(task) {
+      task.title = prompt("Enter task name");
+      task.description = prompt("Enter task description");
       task.id = idCounter;
       setIdCounter(idCounter + 1);
-    }; 
   };
 
   return (
@@ -61,25 +57,29 @@ function App() {
           To-Do List
         </h1>
       </header>
-      <div className="active-list">
-        <h2>Active</h2>
-        <button
-          onClick={() => handleAddTask()}
-        >
-          add
-        </button>
-        <div>
-          {activeTasks.map(task => (
-            <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck(task)} editFunc={handleEdit(task)} key={task.id} />
-          ))}
+      <button
+        className="add-button"
+        onClick={() => handleAddTask()}
+      >
+        Add task
+      </button>
+      <div className="tasks">
+        <div className="active-list">
+          <h2>Active</h2>
+          <div className="active-tasks">
+
+            {activeTasks.map(task => (
+              <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck} editFunc={handleEdit} key={task.id} />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="completed-list">
-        <h2>Completed</h2>
-        <div>
-          {completedTasks.map(task => (
-            <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck(task)} editFunc={handleEdit(task)} key={task.id} />
-          ))}
+        <div className="completed-list">
+          <h2>Completed</h2>
+          <div className="completed-tasks">
+            {completedTasks.map(task => (
+              <TaskComponent item={task} removeFunc={handleRemoveTask} checkFunc={handleCheck} editFunc={handleEdit} key={task.id} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
