@@ -73,6 +73,10 @@ function App() {
   }
 
   function handleMarkCompleted() {
+    if (activeTasks.length === 0) {
+      alert("No active tasks to mark.");
+      return;
+    }
     const updatedActiveTasks = activeTasks.map(task => {
       task.completed = true;
       return task;
@@ -82,6 +86,10 @@ function App() {
   }
 
   function handleMarkActive() {
+    if (completedTasks.length === 0) {
+      alert("No completed tasks to mark.");
+      return;
+    }
     const updatedCompletedTasks = completedTasks.map(task => {
       task.completed = false;
       return task;
