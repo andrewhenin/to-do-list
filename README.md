@@ -22,10 +22,63 @@ This project is the first in the hackathon.
 - [ ] 5. I want to categorize the tasks into different categories.
 - [ ] 6. I should be able to reoder the tasks in the list.
 
+## Learned Lessons:
 
-## Available Scripts
+### Thoughts:
+ 
+ - I am now more aware of the difference bewteen funcation calls and function references.
 
-In the project directory, you can run:
+- Let `myFunction` be a function that has a certain return. `myFunction()` is a call that will be invoked and give out the return, and then the return will be used in place of the function.
+
+- If `myFunction()` is intended to be used as a *callback* for an event, this is not the correct way to do it. For example, this line
+```
+JSX
+<button onClick={myFunction()}>Click me</button>
+```
+will invoke the function once the button renders. 
+
+- The correct way of doing this is to pass in a *reference* to `myFunction()`, which will be `myFunction`. This is as follows:
+```
+JSX
+<button onClick={myFunction}>Click me</button>
+```
+In this line, the function `myFunction()` will be called only when the button is clicked, which will execute the code inside the function.
+
+### Best Practices:
+
+Working with callbacks in React can get tricky. Therefore, the best practices for dealing with callbacks are:
+
+- **Do not invoke the function when passing it as a callback:** Avoid using parentheses when passing a function as a callback. Always pass the reference to the function without invoking it.
+
+- **Use arrow functions or bind:** When passing a function that requires specific context or arguments, two ways of doing this is by either using *arrow functions* or the `.bind()` method to ensure that the function is invoked with the correct context and arguments. An example for the *arrow notation* vs using `.bind()` is as follows:
+```
+JSX
+<button onClick={() => myFunction(argument)}>Click me</button>
+```
+```
+JSX
+<button onClick={myFunction.bind(this, argument)}>Click me</button>
+```
+
+- Lastly, **I can avoid exessive re-renders.** This is by using `useCallback`. When passing in references of functions as props to a child component, there is the risk of re-rendering this child component every time the parent renders. To avoid this, using the hook `useCallback` is a good idea. `useCallback` memoizes the function and ensures it only changes when its `dependencies` change. This is an example of using the hook:
+```
+JSX
+import { useCallback } from 'react';
+
+const MyComponent = ({ onClick }) => {
+    const myFunction = useCallback(() => {
+        onClick(argument);
+    }, [onClick]);
+
+    return (
+        <button onClick={myFunction}>Click me</button>
+    );
+};
+```   
+
+## To run the project:
+
+Clone the repo and in the project directory, you can run:
 
 ### `npm start`
 
@@ -34,58 +87,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
