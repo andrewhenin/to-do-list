@@ -10,7 +10,7 @@ This project is the first in the hackathon.
 - [x] 3. I should be able to mark a task as completed.
 - [x] 4. I should be able to see all the completed tasks.
 - [x] 5. I should be able to see all the uncompleted tasks.
-- [ ] 7. I should be able to edit the task.
+- [x] 7. I should be able to edit the task.
 
 ### Stretch:
 - [ ] 1. I want to set a due date for the task.
