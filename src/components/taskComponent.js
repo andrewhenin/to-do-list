@@ -10,19 +10,25 @@ export const TaskComponent = ({item, removeFunc, checkFunc, editFunc}) => {
                 checked={item.completed}
             >
             </input>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
             <span 
                 id="title"
-                className="title"
+                className={styles["title"]}
             >
                 {item.title}
             </span>
             &nbsp;
             <span 
+                className={styles["description"]}
                 id="description"
             >
                 {item.description}
             </span>
-            <div>
+            <div className={styles["buttons"]}>
                 <button
                     onClick={() => editFunc(item)}
                 >

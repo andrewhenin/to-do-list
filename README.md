@@ -12,6 +12,8 @@ This project is the first in the hackathon.
 - [x] 5. I should be able to see all the uncompleted tasks.
 - [x] 7. I should be able to edit the task.
 
+
+![Alt text](image.png)
 ### Stretch:
 - [ ] 1. I want to set a due date for the task.
 - [ ] 2. I want to see the tasks in order of due date.
