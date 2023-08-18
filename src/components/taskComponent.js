@@ -12,7 +12,6 @@ export const TaskComponent = ({item, removeFunc, checkFunc, editFunc}) => {
             <span>
                 Title: 
                 <span 
-                    contentEditable={true}
                     id="title"
                 >
                     {item.title}
@@ -22,7 +21,6 @@ export const TaskComponent = ({item, removeFunc, checkFunc, editFunc}) => {
             <span>
                 Description: 
                 <span 
-                    contentEditable={true}
                     id="description"
                 >
                     {item.description}

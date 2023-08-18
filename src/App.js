@@ -43,18 +43,12 @@ function App() {
 
   const handleEdit = (task) => {
     return () => {
-      const updatedTask = { ...task, title: prompt("Enter task name"), description: prompt("Enter task description"), id: idCounter };
+      task.title = prompt("Enter task name")
+      task.description = prompt("Enter task description")
+      task.id = idCounter;
       setIdCounter(idCounter + 1);
-      if (!task.completed) {
-        setActiveTasks(activeTasks.filter(current_task => current_task.id !== task.id));
-        setActiveTasks([...activeTasks, updatedTask]);
-      } else {
-        setcompletedTasks([...completedTasks, updatedTask]);
-        setcompletedTasks(completedTasks.filter(current_task => current_task.id !== task.id));
-      }
     }; 
   };
-
 
   return (
     <div className="App">
