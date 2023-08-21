@@ -14,7 +14,7 @@ This project is the first in the hackathon.
 
 
 ![Alt text](image.png)
-### Stretch:
+### 🚧 Stretch:
 - [ ] 1. I want to set a due date for the task.
 - [ ] 2. I want to see the tasks in order of due date.
 - [ ] 3. I want to set a priority for the task.
