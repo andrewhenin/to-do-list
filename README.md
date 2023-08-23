@@ -1,6 +1,6 @@
 # 7-day Hackathon Project 1: To-Do List
 
-This project is the first in the hackathon.
+This project is the first in the tutorial-less hackathon.
 
 ## User stories:
 
